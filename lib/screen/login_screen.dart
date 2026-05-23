@@ -95,7 +95,6 @@ class Login extends StatelessWidget {
                 width: 175,
                 height: 50,
                 child: ElevatedButton(onPressed: () {
-                  print: 'Logging in.';
                 },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,

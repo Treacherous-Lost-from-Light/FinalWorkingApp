@@ -7,9 +7,6 @@ class AIService{
  Future<String> getResponse(String message) async {
   
  final String? apiKey = dotenv.env['GROQ_API_KEY'];
-    if (apiKey == null || apiKey!.isEmpty) {
-      return "API key missing";
-    }
   final url = Uri.parse("https://api.groq.com/openai/v1/chat/completions");
 
   final response = await http.post(
