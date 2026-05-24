@@ -9,37 +9,32 @@ class HomePage extends StatefulWidget{
 
 class _HomePage extends State<HomePage> {
  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+ bool moodSelected = false;
  String healthtips = "";
  String moodtext = "";
  String mood = "";
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
     key: _scaffoldKey,
-     appBar: AppBar(
-       backgroundColor: const Color(0xFF4A4460),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.menu, color: Colors.white),
-          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-          ),
-          title: null,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 16),
-            ),
-          ],
-      ),
-
      body: Padding(
-      padding: const EdgeInsets.all(50),
+      padding: const EdgeInsets.all(40),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+           Text("Daily check in",
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+
+         const SizedBox(height: 30),
 
           Text("How are you feeling today?",
           style: TextStyle(
-            fontSize: 28,
+            fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
           ),
@@ -52,35 +47,73 @@ class _HomePage extends State<HomePage> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  mood = "Happy";
-                   moodtext = "You seem happy!";
+                  
+                  if(mood == "Happy") {
+                    moodSelected = false;
+                    mood = "";
+                  }
+                  else{
+                    moodSelected = true;
+                    mood = "Happy";
+                    moodtext = "You seem happy today!";
+                  }
                 });
               },
               child: const Icon(Icons.sentiment_very_satisfied, size: 40),
             ),
+
              GestureDetector(
               onTap: () {
                  setState(() {
-                  mood = "Normal";
-                   moodtext = "Why so serious";
+
+                  if(mood == "Normal") {
+                    moodSelected = false;
+                    mood = "";
+                  }
+                  else{
+                    moodSelected = true;
+                    mood = "Normal";
+                    moodtext = "Why so serious";
+                  }
+                  
                 });
               },
               child: const Icon(Icons.sentiment_neutral, size: 40),
             ),
+
               GestureDetector(
               onTap: () {
                  setState(() {
-                   mood = "Unhappy";
-                   moodtext = "Had a rough day?";
+
+                  if(mood == "Unhappy") {
+                    moodSelected = false;
+                    mood = "";
+                  }
+                  else{
+                    moodSelected = true;
+                    mood = "Unhappy";
+                    moodtext = "You seem to have a bad day";
+                  }
+
                 });
               },
               child: const Icon(Icons.sentiment_dissatisfied, size: 40),
             ),
+
               GestureDetector(
               onTap: () {
                  setState(() {
-                  mood = "Stressed";
-                  moodtext = "You seem to have a bad day.";
+
+                 if(mood == "Stressed") {
+                    moodSelected = false;
+                    mood = "";
+                  }
+                  else{
+                    moodSelected = true;
+                    mood = "Stressed";
+                    moodtext = "Are you okay?";
+                  }
+
                 });
               },
               child: const Icon(Icons.mood_bad, size: 40),
@@ -88,24 +121,22 @@ class _HomePage extends State<HomePage> {
           ],
         ),
 
-      const SizedBox(height: 30),
+        _MoodSelected(),
 
-        Text(
-          moodtext,
-          style: const TextStyle(fontSize: 18),
-        ),
 
        const SizedBox(height: 30),
-
         GestureDetector(
           onTap: () {
             setState(() {
-              healthtips = "this is a placeholder for your damn tip";
+              if(healthtips == "") {
+                healthtips = "tip";
+              }
+              else {healthtips = ""; }
             });
           },
           child: Text("Daily health tips",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
           ),
@@ -116,7 +147,7 @@ class _HomePage extends State<HomePage> {
          Text(
           healthtips,
           style: TextStyle(
-            fontSize: 18
+            fontSize: 15,
           ),
          )
 
@@ -127,4 +158,42 @@ class _HomePage extends State<HomePage> {
 
     );
   }
+
+  Widget _MoodSelected() {
+    if(moodSelected) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+
+          Text(moodtext,
+          style: TextStyle(
+          fontSize: 15,
+          ),
+          ),
+          const SizedBox(height: 20),
+          Text("Recommendation: ",
+          style: TextStyle(fontSize: 25),
+          ),
+          
+          const SizedBox(height: 20),
+           if(mood == "Happy") ...[
+             Text("What would you like to do for today?",
+             style: TextStyle(fontSize: 16),)
+           ]
+           else if(mood == "Normal") ...[
+
+           ]
+           else if(mood == "Unhappy") ...[
+            
+           ]
+           else if(mood == "Stressed") ...[
+            
+           ]
+
+          ],
+      );
+    }
+    return const SizedBox.shrink();
+  }
+
 }
