@@ -147,7 +147,7 @@ class _HomePage extends State<HomePage> {
          Text(
           healthtips,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 13,
           ),
          )
 
@@ -171,29 +171,76 @@ class _HomePage extends State<HomePage> {
           ),
           ),
           const SizedBox(height: 20),
-          Text("Recommendation: ",
-          style: TextStyle(fontSize: 25),
-          ),
-          
-          const SizedBox(height: 20),
            if(mood == "Happy") ...[
-             Text("What would you like to do for today?",
-             style: TextStyle(fontSize: 16),)
+             _moodRecommendations(
+              "You're happy today, I'm proud of you", 
+              "Writing helps you to maintain mood and record.",
+              "Begin Writing")
            ]
            else if(mood == "Normal") ...[
-
+                 _moodRecommendations(
+              "So a normal day is it?", 
+              "Sometimes we forget to notice the small things that truly matters. Writing down a moment or feeling that lingered for a bit than it should have helps you notice those small things.",
+              "Begin Writing")
            ]
            else if(mood == "Unhappy") ...[
-            
+                   _moodRecommendations(
+              "You semm sad today.", 
+              "Writing helps you to maintain mood and record.",
+              "Begin Writing")
            ]
            else if(mood == "Stressed") ...[
-            
+                     _moodRecommendations(
+              "You seemed overwhelmed today.", 
+              "Take a short pause and breathe. Small moment of calm can help reset you mind.",
+              "Begin Exercise")
            ]
 
           ],
       );
     }
     return const SizedBox.shrink();
+  }
+
+  Widget _moodRecommendations(String feeling, String message, String action) {
+    return Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(11),
+                color: Colors.amber,
+              ),
+        
+              //TEXT
+              child: Column(
+                children: [
+                  Text(feeling,
+                  style: TextStyle(
+                    color: Colors.black,
+                   ),
+                  ),
+                  Text(message,
+                  style: TextStyle(
+                    color: Colors.black,
+                   ),
+                 ),
+
+                 SizedBox(height: 10,),
+
+                  GestureDetector(
+                  onTap: () {},
+                 child: Text(action,
+                  style: TextStyle(
+                  color: Colors.black,
+                   ),
+                 ),
+                  )
+                ],
+            )
+     );
+           
+     
+
+      
   }
 
 }
