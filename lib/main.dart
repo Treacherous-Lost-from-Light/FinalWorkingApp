@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     initialRoute: '/splash',
     routes: {
       '/splash': (context) => const SplashScreen(),
-      '/': (context) => const HomePage(),
+      '/': (context) => HomePage(),
       '/Chatbot': (context) => const ChatBotScreen(), 
       '/Breathing': (context) => const BreathingScreen(),
       '/Checkin': (context) => const Moodcheckin(),

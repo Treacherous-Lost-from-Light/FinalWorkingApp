@@ -8,11 +8,10 @@ class Moodcheckin extends StatefulWidget{
 }
 
 class _Moodcheckin extends State<Moodcheckin> {
- bool moodSelected = false;
- String healthtips = "";
- String moodtext = "";
- String mood = "";
- 
+  String currentMood = "";
+  bool moodSelected = false;
+  String healthtips = "";
+  String moodtext = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +46,13 @@ class _Moodcheckin extends State<Moodcheckin> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  if(mood == "Happy") {
-                    moodSelected = false;
-                    mood = "";
+                  if(currentMood == "Happy") {
+                     moodSelected = false;
+                     currentMood = "";
                   }
                   else{
                     moodSelected = true;
-                    mood = "Happy";
+                    currentMood = "Happy";
                     moodtext = "You seem happy today!";
                   }
                 });
@@ -65,13 +64,13 @@ class _Moodcheckin extends State<Moodcheckin> {
               onTap: () {
                  setState(() {
 
-                  if(mood == "Normal") {
+                  if(currentMood == "Normal") {
                     moodSelected = false;
-                    mood = "";
+                    currentMood = "";
                   }
                   else{
                     moodSelected = true;
-                    mood = "Normal";
+                    currentMood = "Normal";
                     moodtext = "Why so serious";
                   }
                   
@@ -84,13 +83,13 @@ class _Moodcheckin extends State<Moodcheckin> {
               onTap: () {
                  setState(() {
 
-                  if(mood == "Unhappy") {
+                  if(currentMood == "Unhappy") {
                     moodSelected = false;
-                    mood = "";
+                   currentMood = "";
                   }
                   else{
                     moodSelected = true;
-                    mood = "Unhappy";
+                    currentMood = "Unhappy";
                     moodtext = "You seem to have a bad day";
                   }
 
@@ -103,13 +102,13 @@ class _Moodcheckin extends State<Moodcheckin> {
               onTap: () {
                  setState(() {
 
-                 if(mood == "Stressed") {
+                 if(currentMood== "Stressed") {
                     moodSelected = false;
-                    mood = "";
+                    currentMood= "";
                   }
                   else{
                     moodSelected = true;
-                    mood = "Stressed";
+                    currentMood = "Stressed";
                     moodtext = "Are you okay?";
                   }
 
@@ -140,20 +139,29 @@ class _Moodcheckin extends State<Moodcheckin> {
           ),
           ),
           const SizedBox(height: 20),
-           if(mood == "Happy") ...[
+           if(currentMood == "Happy") ...[
             _mooodswings(context,
              "You're happy", 
              "Maintain your mood", 
              )
            ]
-           else if(mood == "Normal") ...[
-                 
+           else if(currentMood == "Normal") ...[
+             _mooodswings(context,
+             "You're normal", 
+             "Maintain your mood", 
+             )    
            ]
-           else if(mood == "Unhappy") ...[
-                  
+           else if(currentMood == "Unhappy") ...[
+              _mooodswings(context,
+             "You're unhappy", 
+             "Maintain your mood", 
+             )    
            ]
-           else if(mood == "Stressed") ...[
-                     
+           else if(currentMood == "Stressed") ...[
+             _mooodswings(context,
+             "You're stressed", 
+             "Maintain your mood", 
+             )
            ]
 
           ],
@@ -179,7 +187,11 @@ class _Moodcheckin extends State<Moodcheckin> {
 
         ElevatedButton(
           onPressed: () {
-             Navigator.pushNamed(context, '/');
+             Navigator.pushNamed(
+              context, 
+              '/',
+              arguments: currentMood
+              );
           }, 
           child: Text(
             "Continue",
