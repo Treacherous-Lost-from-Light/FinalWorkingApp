@@ -15,10 +15,12 @@ class _Moodcheckin extends State<Moodcheckin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(padding: EdgeInsets.all(40),
+      body: Padding(padding: EdgeInsets.all(20),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          
 
           Text("Daily Check in",
           style: TextStyle(
@@ -32,7 +34,7 @@ class _Moodcheckin extends State<Moodcheckin> {
 
           Text("How are you feeling today?",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 23,
             fontWeight: FontWeight.bold,
           ),
           ),
@@ -57,7 +59,15 @@ class _Moodcheckin extends State<Moodcheckin> {
                   }
                 });
               },
-              child: const Icon(Icons.sentiment_very_satisfied, size: 40),
+              child: AnimatedScale(
+                scale: currentMood == "Happy" ? 1.4 : 1.0, 
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeOut,
+                child: Icon(
+                  Icons.sentiment_very_satisfied, 
+                  size: 40,
+                  color: currentMood == "Happy" ? Color(0xFFFDD835) : Colors.grey),
+                )
             ),
 
              GestureDetector(
@@ -76,7 +86,14 @@ class _Moodcheckin extends State<Moodcheckin> {
                   
                 });
               },
-              child: const Icon(Icons.sentiment_neutral, size: 40),
+              child: AnimatedScale(
+                scale: currentMood == "Normal" ? 1.4 : 1.0, 
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeOut,
+                child: Icon(Icons.sentiment_neutral, 
+                size: 40,
+                 color: currentMood == "Normal" ? Color(0xFF90A4AE) : Colors.grey),
+                ),
             ),
 
               GestureDetector(
@@ -95,7 +112,14 @@ class _Moodcheckin extends State<Moodcheckin> {
 
                 });
               },
-              child: const Icon(Icons.sentiment_dissatisfied, size: 40),
+               child: AnimatedScale(
+                scale: currentMood == "Unhappy" ? 1.4 : 1.0, 
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeOut,
+                child: Icon(Icons.sentiment_dissatisfied, 
+                size: 40,
+                 color: currentMood == "Unhappy" ? Color(0xFFFF8A65) : Colors.grey),
+                )
             ),
 
               GestureDetector(
@@ -114,7 +138,14 @@ class _Moodcheckin extends State<Moodcheckin> {
 
                 });
               },
-              child: const Icon(Icons.mood_bad, size: 40),
+               child: AnimatedScale(
+                scale: currentMood == "Stressed" ? 1.4 : 1.0, 
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeOut,
+                child: Icon(Icons.mood_bad, 
+                size: 40,
+                 color: currentMood == "Stressed" ? Color(0xFFE57373) : Colors.grey),
+                )
             ),
           ],
         ),
@@ -133,12 +164,7 @@ class _Moodcheckin extends State<Moodcheckin> {
         mainAxisAlignment: MainAxisAlignment.start,
           children: [
 
-          Text(moodtext,
-          style: TextStyle(
-          fontSize: 15,
-          ),
-          ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 30),
            if(currentMood == "Happy") ...[
             _mooodswings(context,
              "You're happy", 
@@ -179,11 +205,15 @@ class _Moodcheckin extends State<Moodcheckin> {
         ),
         ),
 
+        SizedBox(height: 10),
+
         Text(moodReflection,
         style: TextStyle(
           fontSize: 15,
         ),
         ),
+
+        SizedBox(height: 30),
 
         ElevatedButton(
           onPressed: () {
