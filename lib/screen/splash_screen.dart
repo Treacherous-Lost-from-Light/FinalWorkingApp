@@ -39,7 +39,7 @@ class SplashScreen extends StatefulWidget{
         _controller.forward();
     
       _timer = Timer(const Duration(seconds: 3), (){
-          Navigator.pushReplacementNamed(context, '/' );
+          Navigator.pushReplacementNamed(context, '/Checkin' );
       });
     }
 
