@@ -15,6 +15,7 @@ class _Moodcheckin extends State<Moodcheckin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF060F1A),
       body: Padding(padding: EdgeInsets.all(20),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +25,7 @@ class _Moodcheckin extends State<Moodcheckin> {
 
           Text("Daily Check in",
           style: TextStyle(
-            color: Colors.black,
+            color: Color(0xFFB5D4F4),
             fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
@@ -34,6 +35,7 @@ class _Moodcheckin extends State<Moodcheckin> {
 
           Text("How are you feeling today?",
           style: TextStyle(
+            color: Color.fromARGB(255, 169, 199, 228),
             fontSize: 23,
             fontWeight: FontWeight.bold,
           ),
@@ -159,12 +161,14 @@ class _Moodcheckin extends State<Moodcheckin> {
 
   } 
    Widget _MoodSelected() {
-    if(moodSelected) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-
-          const SizedBox(height: 30),
+      return AnimatedOpacity(
+        opacity: moodSelected ? 1.0 : 0.0, 
+        duration: const Duration(milliseconds: 300),
+          child: moodSelected
+          ? Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+                const SizedBox(height: 30),
            if(currentMood == "Happy") ...[
             _mooodswings(context,
              "You're happy", 
@@ -189,48 +193,72 @@ class _Moodcheckin extends State<Moodcheckin> {
              "Maintain your mood", 
              )
            ]
-
-          ],
-      );
-    }
-    return const SizedBox.shrink();
+            ],
+          )
+          : SizedBox.shrink(),
+        );
   }
 
   Widget _mooodswings(BuildContext context, String moodDetails, String moodReflection) {
-    return Column(
-      children: [
-        Text(moodDetails,
-        style: TextStyle(
-          fontSize: 15,
-        ),
-        ),
+    return Container(
 
-        SizedBox(height: 10),
+      width: double.infinity,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Color(0xFF103A5C), 
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Color(0xFF103A5C)),
+      ),
 
-        Text(moodReflection,
-        style: TextStyle(
-          fontSize: 15,
-        ),
-        ),
-
-        SizedBox(height: 30),
-
-        ElevatedButton(
-          onPressed: () {
-             Navigator.pushNamed(
-              context, 
-              '/',
-              arguments: currentMood
-              );
-          }, 
-          child: Text(
-            "Continue",
-            style: TextStyle(
-              fontSize: 15
-            ),
-            ),
+      child: Column(
+        children: [
+          Text(moodDetails,
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.white,
+          ),
+          ),
+      
+          SizedBox(height: 10),
+      
+          Text(moodReflection,
+          style: TextStyle(
+            fontSize: 15,
+            color: Colors.white,
+          ),
+          ),
+      
+          SizedBox(height: 30),
+      
+          SizedBox(
+            width: double.infinity, // Full-width button inside the card
+            height: 40,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFFB5D4F4), // Using your light icy blue
+                foregroundColor: const Color(0xFF060F1A), // Dark text color for massive contrast
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0,
+              ),
+              onPressed: () {
+                 Navigator.pushNamed(
+                  context, 
+                  '/',
+                  arguments: currentMood
+                  );
+              }, 
+              child: Text(
+                "Continue",
+                style: TextStyle(
+                  fontSize: 15
+                ),
+                ),
+              ),
           )
-      ],
+        ],
+      ),
     );
 
   }
