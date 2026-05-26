@@ -141,6 +141,9 @@ class _ChatBotScreen extends State<ChatBotScreen> {
       appBar: AppBar(
         backgroundColor: AppColorScheme.surface,
         elevation: 0,
+        iconTheme: const IconThemeData(
+          color: Color(0xFFB5D4F4),
+        ),
         title: const Text(
           'Herzpunkt',
           style: TextStyle(

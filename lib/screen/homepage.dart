@@ -63,7 +63,7 @@ class _HomePage extends State<HomePage> {
             "You're happy today, I'm proud of you", 
             "Writing helps you to maintain mood.", 
             "Begin Writing", 
-            '/Chatbot')
+            '/Journal')
         ]
         else if(mood == "Normal") ...[
           _moodRecommendationCard(
@@ -72,7 +72,7 @@ class _HomePage extends State<HomePage> {
             "So a normal day is it?", 
             "Sometimes we forget to notice the small things that truly matters. Writing down a moment or feeling that lingered for a bit than it should have helps you notice those small things.", 
             "Begin Writing", 
-            '/Breathing')
+            '/Journal')
         ]
         else if(mood == "Unhappy") ...[
           _moodRecommendationCard(
@@ -192,13 +192,13 @@ class _HomePage extends State<HomePage> {
                 if(maybeButton == true) ...[
                   if(action == "Begin Exercise") ...[
                        SizedBox(height: 10),
-                      _actionButton("Try Writing", '/Chatbot'),
+                      _actionButton("Try Writing", '/Journal'),
                        SizedBox(height: 10),
                       _actionButton("Talk with Lucas", '/Chatbot'),
                   ]
                   else if(action == "Talk with Lucas") ...[
                       SizedBox(height: 10),
-                      _actionButton("Try Writing", '/Chatbot'),
+                      _actionButton("Try Writing", '/Journal'),
                        SizedBox(height: 10),
                       _actionButton("Try Exercise", '/Breathing'),
                   ]
