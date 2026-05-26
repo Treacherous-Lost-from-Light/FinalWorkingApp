@@ -1,4 +1,5 @@
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import '../color_scheme.dart';
 
   class BreathingScreen extends StatefulWidget{
     const BreathingScreen({super.key});
@@ -14,9 +15,9 @@
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0B1929),
+      backgroundColor: AppColorScheme.bg,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1D3A5C),
+        backgroundColor: AppColorScheme.surface,
         elevation: 0,
         iconTheme: const IconThemeData(
           color: Color(0xFFB5D4F4),
@@ -98,11 +99,11 @@
             padding: const EdgeInsets.all(16),
 
             decoration: BoxDecoration(
-              color: const Color(0xFF1D3A5C),
+              color: AppColorScheme.elevated,
               borderRadius: BorderRadius.circular(14),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.blue,
+                  color: AppColorScheme.border,
                   blurRadius: 5,
                   offset: const Offset(0, 5),
                 ),

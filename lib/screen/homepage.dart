@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget{
 
 class _HomePage extends State<HomePage> {
  Moodcheckin moodcheckin = Moodcheckin();
+ bool maybeButton = false;
  String healthtips = "";
  
   @override
@@ -35,36 +36,56 @@ class _HomePage extends State<HomePage> {
                    ),
                    ),
          ),
+         SizedBox(height: 5,),
+         Container(
+          alignment: Alignment.topLeft,
+           child: GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/Checkin');
+            },
+            child: Text(
+              "Change mood",
+              style: TextStyle(
+               fontSize: 14,
+               color: Color.fromARGB(255, 129, 152, 175)
+              ),
+              ),
+           ),
+         ),
 
-        SizedBox(height: 100,),
+        SizedBox(height: 40,),
         
         if(mood == "Happy") ...[
           _moodRecommendationCard(
             context, 
+            mood,
             "You're happy today, I'm proud of you", 
             "Writing helps you to maintain mood.", 
-            "Begin writing", 
+            "Begin Writing", 
             '/Chatbot')
         ]
         else if(mood == "Normal") ...[
           _moodRecommendationCard(
             context, 
+            mood,
             "So a normal day is it?", 
             "Sometimes we forget to notice the small things that truly matters. Writing down a moment or feeling that lingered for a bit than it should have helps you notice those small things.", 
-            "Begin exercise", 
+            "Begin Writing", 
             '/Breathing')
         ]
         else if(mood == "Unhappy") ...[
           _moodRecommendationCard(
             context, 
+            mood,
             "You seem sad today", 
-            "Writing down what bothers you helps lighten your mood. Talking about it also helps.", 
+            "Writing down what bothers you helps lighten your mood. \nTalking about your feelings definitely helps too.", 
             "Talk with Lucas", 
             '/Chatbot')
         ]
         else if(mood == "Stressed") ...[
           _moodRecommendationCard(
             context, 
+            mood,
             "You seemed overwhelmed today.?", 
             "Take a short pause and breathe. Small moment of calm can help reset you mind.", 
             "Begin Exercise", 
@@ -107,7 +128,7 @@ class _HomePage extends State<HomePage> {
     );
   }
 
-  Widget _moodRecommendationCard(BuildContext context, String feeling, String message, String action, String routename) {
+  Widget _moodRecommendationCard(BuildContext context,String mood, String feeling, String message, String action, String routename) {
     return Container(
         width: double.infinity,
         padding: const EdgeInsets.all(20),
@@ -119,17 +140,19 @@ class _HomePage extends State<HomePage> {
         
               //TEXT
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
 
 
                   Text(feeling,
                   style: TextStyle(
                     color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
                    ),
                   ),
                   
-                  SizedBox(height: 15),
+                  SizedBox(height: 30),
 
                   Text(message,
                   style: TextStyle(
@@ -137,24 +160,77 @@ class _HomePage extends State<HomePage> {
                    ),
                  ),
 
-                 SizedBox(height: 10,),
+                 SizedBox(height: 30),
 
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, routename);
+                 Text("Try starting with this: ",
+                  style: TextStyle(
+                    color: Colors.white,
+                   ),
+                 ),
+
+                  SizedBox(height: 30),
+
+                  _actionButton(action, routename),
+                
+                SizedBox(height: 30),
+
+                  GestureDetector(
+                    onTap: () {
+                     setState(() {
+                       maybeButton = !maybeButton;
+                     });
                     },
-                     child: Text(action,
+
+                    child: Text("Maybe this could help: ",
                      style: TextStyle(
-                      color: Colors.black,
+                       color: Colors.white,
                      ),
-                     ),
-                    )
+                    ),
+                ),
+
+                if(maybeButton == true) ...[
+                  if(action == "Begin Exercise") ...[
+                       SizedBox(height: 10),
+                      _actionButton("Try Writing", '/Chatbot'),
+                       SizedBox(height: 10),
+                      _actionButton("Talk with Lucas", '/Chatbot'),
+                  ]
+                  else if(action == "Talk with Lucas") ...[
+                      SizedBox(height: 10),
+                      _actionButton("Try Writing", '/Chatbot'),
+                       SizedBox(height: 10),
+                      _actionButton("Try Exercise", '/Breathing'),
+                  ]
+                  else if(action == "Begin Writing") ...[
+                      SizedBox(height: 10),
+                      _actionButton("Talk with Lucas", '/Chatbot'),
+                       SizedBox(height: 10),
+                      _actionButton("Try Exercise", '/Breathing'),
+                  ]
+
+                ],
+            
                   
                 ],
             )
      );
-           
-      
   }
+
+Widget _actionButton(String action, String routename) {
+ return Container(
+      alignment: Alignment.center,
+      child: ElevatedButton(
+       onPressed: () {
+        Navigator.pushNamed(context, routename);
+      },
+
+       child: Text(action,
+       style: TextStyle(
+       color: Colors.black,
+              ),
+          ),
+      ),
+ );
+}
 
 }
