@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../color_scheme.dart';
+import 'dart:async';
 
   class BreathingScreen extends StatefulWidget{
     const BreathingScreen({super.key});
@@ -9,9 +10,50 @@ import '../color_scheme.dart';
   }
 
   class _BreathingScreen extends State<BreathingScreen> {
-  bool isBreathingIn = true;
+  
   bool isButtonTapped = false;
+  bool isBreathingIn = true;
 
+  Timer? breathingTimer;
+  int secondsPassed = 0;
+
+  void startBreathing() {
+  setState(() {
+    isButtonTapped = true;
+    isBreathingIn = false; 
+    secondsPassed = 0;
+  });
+
+  breathingTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
+    setState(() {
+      secondsPassed += 3;
+
+      if (secondsPassed >= 30) {
+        timer.cancel();
+        isButtonTapped = false;
+        isBreathingIn = true; 
+      } else {
+        isBreathingIn = !isBreathingIn;
+      }
+    });
+  });
+}
+
+void stopBreathing() {
+  breathingTimer?.cancel();
+
+  setState(() {
+    isButtonTapped = false;
+    isBreathingIn = true;
+    secondsPassed = 0;
+  });
+}
+
+  @override
+  void dispose() {
+    breathingTimer?.cancel();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,8 +92,8 @@ import '../color_scheme.dart';
 
           AnimatedScale(
             scale: isBreathingIn ? 1.0 : 1.5, 
-            duration: isBreathingIn ? Duration(seconds: 2) :  Duration(seconds: 4),
-            curve: Curves.easeOut,
+            duration: const Duration(seconds: 3),
+            curve: Curves.easeInOut,
 
              child: Container(
               width: 100,
@@ -73,12 +115,8 @@ import '../color_scheme.dart';
 
           SizedBox(height: 40),
           ElevatedButton(
-            onPressed: () {
-              setState(() {
-                 isBreathingIn = !isBreathingIn;
-                 isButtonTapped = true;
-              });
-            },
+            onPressed: isButtonTapped ? stopBreathing : startBreathing,
+  
             style: ElevatedButton.styleFrom(
               backgroundColor: Color(0xFF0B1929),
               foregroundColor: const Color(0xFFB5D4F4),
@@ -86,7 +124,7 @@ import '../color_scheme.dart';
             ),
 
             child: Text(
-                "Start breathing exercise",
+                isButtonTapped ? "Stop" : "Start breathing exercise",
               style: TextStyle(
                 color: Color(0xFFB5D4F4),
               ),
