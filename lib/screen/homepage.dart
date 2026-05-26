@@ -44,14 +44,14 @@ class _HomePage extends State<HomePage> {
             "You're happy today, I'm proud of you", 
             "Writing helps you to maintain mood.", 
             "Begin writing", 
-            '/Breathing')
+            '/Chatbot')
         ]
         else if(mood == "Normal") ...[
           _moodRecommendationCard(
             context, 
             "So a normal day is it?", 
             "Sometimes we forget to notice the small things that truly matters. Writing down a moment or feeling that lingered for a bit than it should have helps you notice those small things.", 
-            "Begin writing", 
+            "Begin exercise", 
             '/Breathing')
         ]
         else if(mood == "Unhappy") ...[
@@ -67,7 +67,7 @@ class _HomePage extends State<HomePage> {
             context, 
             "You seemed overwhelmed today.?", 
             "Take a short pause and breathe. Small moment of calm can help reset you mind.", 
-            "Begin writing", 
+            "Begin Exercise", 
             '/Breathing')
         ],
 
