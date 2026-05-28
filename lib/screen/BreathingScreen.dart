@@ -17,6 +17,7 @@ import 'dart:async';
   Timer? breathingTimer;
   int secondsPassed = 0;
 
+  //Responsible for the timer when the the button is tapped.
   void startBreathing() {
   setState(() {
     isButtonTapped = true;
@@ -39,6 +40,8 @@ import 'dart:async';
   });
 }
 
+//This is responsible so that StartBreathing() can be stopped halfway when
+//the user pressed the button again
 void stopBreathing() {
   breathingTimer?.cancel();
 
@@ -54,6 +57,7 @@ void stopBreathing() {
     breathingTimer?.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,6 +71,7 @@ void stopBreathing() {
 
       ),
 
+      //Layout of whole screen
       body: Center(
         child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -80,6 +85,11 @@ void stopBreathing() {
             ),
           ),
           SizedBox(height: 40),
+            //If button is not tapped, a empty string is used instead so that
+            //it won't suddenly appear, pushing the other widgets away.
+            //If button is tapped, checks whether isBreathingin true or false so 
+            //the text could change between Inhale and Exhale.
+            
             Text(isButtonTapped ? isBreathingIn ? "Exhale..." : "Inhale..." : "",
             style: TextStyle(
               color: Color(0xFFB5D4F4),
@@ -90,6 +100,8 @@ void stopBreathing() {
          
           SizedBox(height: 30),
 
+          //Changed from AnimatedContainer to AnimatedScale so that the other widgets 
+          //woouldnt be pushed away
           AnimatedScale(
             scale: isBreathingIn ? 1.0 : 1.5, 
             duration: const Duration(seconds: 3),
@@ -114,7 +126,11 @@ void stopBreathing() {
           ),
 
           SizedBox(height: 40),
+          
+          //Button for starting the breathing exercise.
+          //Responsible for design and logic of the button
           ElevatedButton(
+
             onPressed: isButtonTapped ? stopBreathing : startBreathing,
   
             style: ElevatedButton.styleFrom(
@@ -133,6 +149,8 @@ void stopBreathing() {
 
           SizedBox(height: 20),
 
+
+          //Recommendation card design
           Container(
             padding: const EdgeInsets.all(16),
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../color_scheme.dart';
 
+
 class AboutAppScreen extends StatelessWidget {
   const AboutAppScreen({super.key});
 
@@ -103,6 +104,7 @@ class AboutAppScreen extends StatelessWidget {
     );
   }
 
+  //reusable widget to declutter code
   Widget _buildCard({
     required IconData icon,
     required String title,

@@ -174,8 +174,8 @@ class _ChatBotScreen extends State<ChatBotScreen> {
         children: [
           Expanded(
             child: messages.isEmpty
-                ? _buildEmptyState()  // ← heart icon when no messages
-                : ListView.builder(   // ← chat bubbles when messages exist
+                ? _buildEmptyState()  
+                : ListView.builder(   
                     controller: _scrollController,
                     itemCount: messages.length,
                     itemBuilder: (context, index) => _buildChatBubble(index),

@@ -21,8 +21,7 @@ class _Moodcheckin extends State<Moodcheckin> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          
-
+        
           Text("Daily Check in",
           style: TextStyle(
             color: Color(0xFFB5D4F4),
@@ -43,6 +42,8 @@ class _Moodcheckin extends State<Moodcheckin> {
 
           const SizedBox(height: 30),
 
+     //This is responsible for the icon designs.
+     //Logic of animation of icons when tapped is here.
          Row(
            mainAxisAlignment: MainAxisAlignment.spaceAround,
            children: [
@@ -160,6 +161,10 @@ class _Moodcheckin extends State<Moodcheckin> {
     );
 
   } 
+
+
+  //A function when a text is shown when a mood is selected
+
    Widget _MoodSelected() {
       return AnimatedOpacity(
         opacity: moodSelected ? 1.0 : 0.0, 
@@ -199,6 +204,8 @@ class _Moodcheckin extends State<Moodcheckin> {
         );
   }
 
+  //Reusable widget for mood card.
+  //Used by MoodSelected() function
   Widget _mooodswings(BuildContext context, String moodDetails, String moodReflection) {
     return Container(
 
@@ -231,12 +238,12 @@ class _Moodcheckin extends State<Moodcheckin> {
           SizedBox(height: 30),
       
           SizedBox(
-            width: double.infinity, // Full-width button inside the card
+            width: double.infinity, 
             height: 40,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFB5D4F4), // Using your light icy blue
-                foregroundColor: const Color(0xFF060F1A), // Dark text color for massive contrast
+                backgroundColor: const Color(0xFFB5D4F4), 
+                foregroundColor: const Color(0xFF060F1A), 
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

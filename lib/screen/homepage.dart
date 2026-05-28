@@ -11,10 +11,11 @@ class HomePage extends StatefulWidget{
 
 class _HomePage extends State<HomePage> {
  bool maybeButton = false;
- String healthtips = "";
  
   @override
   Widget build(BuildContext context) {
+
+    //Takes the variable mood argument from the MoodCheckin
     final mood = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
@@ -35,6 +36,7 @@ class _HomePage extends State<HomePage> {
                    ),
                    ),
          ),
+
          SizedBox(height: 5,),
           
          Container(
@@ -46,7 +48,9 @@ class _HomePage extends State<HomePage> {
                    ),
                    ),
          ),
+
          SizedBox(height: 5,),
+
          Container(
           alignment: Alignment.topLeft,
            child: GestureDetector(
@@ -116,8 +120,7 @@ class _HomePage extends State<HomePage> {
           ),
         ),
 
-        
-
+  
         ],
       ),
       )
@@ -125,27 +128,24 @@ class _HomePage extends State<HomePage> {
     );
   }
 
+  //The layout and design for the Recommendation card.
+  //ElevatedButton included
   Widget _moodRecommendationCard(BuildContext context,String mood, String feeling, String message, String action, String routename) {
    Color moodColor = AppColorScheme.accentRim2;
-   IconData moodIcon = Icons.favorite;
    if (mood == "Happy") {
    moodColor = Color.fromARGB(150, 247, 219, 97);
-   moodIcon = Icons.wb_sunny;
    }
 
    else if (mood == "Normal") {
    moodColor = Color(0xFF90A4AE);
-   moodIcon = Icons.cloud;
    }
 
    else if (mood == "Unhappy") {
    moodColor = Color.fromARGB(255, 96, 95, 170);
-   moodIcon = Icons.cloud_queue;
    }
 
    else if (mood == "Stressed") {
    moodColor = Color.fromARGB(255, 90, 76, 116);
-   moodIcon = Icons.nights_stay;
    }
     return Container(
         width: double.infinity,
@@ -206,6 +206,8 @@ class _HomePage extends State<HomePage> {
                     ),
                 ),
 
+                //Changes the button in the 'Maybe this could help' depending
+                //on the exising button
                 if(maybeButton == true) ...[
                   if(action == "Begin Exercise") ...[
                        SizedBox(height: 10),
@@ -234,6 +236,8 @@ class _HomePage extends State<HomePage> {
      );
   }
 
+//ElevatedButton is used too often in the _moodRecommendationCard 
+//Used for reusability
 Widget _actionButton(String action, String routename,  Color moodColor,) {
  return Container(
       alignment: Alignment.center,
